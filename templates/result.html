@@ -2,94 +2,78 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Report</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhishGuard Report</title>
 
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-
 <body>
 
-<div class="navbar">
-    <div class="logo">🛡 PhishGuard Report</div>
-</div>
+<div class="bg"></div>
 
-<div class="report">
+<nav class="navbar">
+    <div class="logo">🛡 PhishGuard Report</div>
+    <div class="nav-links">
+        <span>Analysis Complete</span>
+    </div>
+</nav>
+
+<section class="report">
 
     <h1>Threat Analysis Report</h1>
 
-    <div class="url-box">
+    <div class="box">
+        <p><strong>Scanned URL</strong></p>
         <p>{{ url }}</p>
     </div>
 
-    <div class="result-card {{ color }}">
+    <div class="result {{ color }}">
         <h2>{{ result }}</h2>
-        <h3>Confidence: {{ confidence }}%</h3>
+        <h3>Model Confidence: {{ confidence }}%</h3>
+        <h3>Threat Level: {{ threat }}%</h3>
     </div>
 
-    <!-- GAUGE -->
     <div class="meter">
-        <div class="fill" style="width: {{ confidence }}%;"></div>
+        <div class="fill" style="width: {{ threat }}%;"></div>
     </div>
 
-    <p>Threat Level: {{ confidence }}%</p>
-
-    <!-- CHART -->
-    <div class="chart-box">
-        <canvas id="chart"></canvas>
+    <div class="status-box">
+        {% if color == "red" %}
+            <h3 class="danger">⚠ HIGH RISK DETECTED</h3>
+        {% else %}
+            <h3 class="safe">✔ SAFE WEBSITE</h3>
+        {% endif %}
     </div>
 
-    <!-- TERMINAL -->
-    <div class="terminal" id="terminal"></div>
+    <div class="terminal" id="log"></div>
 
-    <a href="/"><button>Scan Again</button></a>
+    <a href="/">
+        <button>Scan Again</button>
+    </a>
 
-    <button onclick="downloadReport()">Download Report</button>
-
-</div>
+</section>
 
 <script>
-/* CHART */
-new Chart(document.getElementById("chart"), {
-    type: "doughnut",
-    data: {
-        labels: ["Safe", "Threat"],
-        datasets: [{
-            data: [100 - {{ confidence }}, {{ confidence }}],
-            backgroundColor: ["#00ff99", "#ff3b3b"]
-        }]
-    }
-});
-
-/* LIVE LOGS */
 let logs = [
-    "Analyzing URL...",
-    "Extracting features...",
-    "Checking domain...",
+    "Initializing scan...",
+    "Extracting URL features...",
+    "Checking domain reputation...",
     "Running ML model...",
-    "Generating result..."
+    "Generating threat score...",
+    "Final result generated ✔"
 ];
 
 let i = 0;
-function showLogs(){
-    if(i < logs.length){
-        document.getElementById("terminal").innerHTML += "> " + logs[i] + "<br>";
+
+function runLogs() {
+    if (i < logs.length) {
+        document.getElementById("log").innerHTML += "> " + logs[i] + "<br>";
         i++;
-        setTimeout(showLogs, 500);
+        setTimeout(runLogs, 500);
     }
 }
-showLogs();
 
-/* DOWNLOAD */
-function downloadReport(){
-    let text = `PhishGuard Report\nURL: {{ url }}\nResult: {{ result }}\nConfidence: {{ confidence }}%`;
-    let blob = new Blob([text], {type:"text/plain"});
-    let link = document.createElement("a");
-    link.href = URL.createObjectURL(blob);
-    link.download = "report.txt";
-    link.click();
-}
+runLogs();
 </script>
 
 </body>

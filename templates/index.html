@@ -2,49 +2,75 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>PhishGuard AI</title>
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhishGuard | Cyber Threat Intelligence</title>
 
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
 </head>
-
 <body>
 
-<div class="navbar">
+<div class="bg"></div>
+
+<nav class="navbar">
     <div class="logo">🛡 PhishGuard</div>
-</div>
+    <div class="nav-links">
+        <span>Dashboard</span>
+        <span>Threat Monitor</span>
+        <span>AI Engine</span>
+    </div>
+</nav>
 
-<div class="hero">
+<section class="hero">
+    <div class="hero-card">
+        <p class="badge">LIVE SECURITY ANALYSIS</p>
+        <h1>Cyber Threat Intelligence System</h1>
+        <p class="subtitle">
+            AI-powered phishing detection with real-time analysis dashboard
+        </p>
 
-    <h1>AI Cyber Threat Detection</h1>
-    <p>Detect phishing websites instantly using Machine Learning</p>
+        <form action="/predict" method="POST" onsubmit="showLoader()" class="scan-form">
+            <input
+                type="text"
+                name="url"
+                placeholder="Enter suspicious URL..."
+                required
+            >
+            <button type="submit">ANALYZE</button>
+        </form>
 
-    <form action="/predict" method="POST" onsubmit="showLoader()">
+        <div id="loader">
+            <p class="typing">Analyzing URL with AI Engine...</p>
+        </div>
+    </div>
+</section>
 
-        <input type="text" name="url" placeholder="Enter URL..." required>
-
-        <button type="submit">Scan</button>
-
-    </form>
-
-    <div id="loader">
-        <div class="spinner"></div>
-        <p>Scanning URL...</p>
+<section class="cards">
+    <div class="card">
+        <h3>⚡ Real-time Scan</h3>
+        <p>Instant threat analysis</p>
     </div>
 
-</div>
+    <div class="card">
+        <h3>🧠 ML Detection</h3>
+        <p>Random Forest model</p>
+    </div>
 
-<div class="features">
-    <div class="card">⚡ Fast</div>
-    <div class="card">🧠 AI Powered</div>
-    <div class="card">🔐 Secure</div>
-</div>
+    <div class="card">
+        <h3>🔐 Secure Analysis</h3>
+        <p>Enterprise-style UI</p>
+    </div>
+</section>
+
+<section class="logs-box">
+    <h3>Live Security Monitor</h3>
+    <p>> Engine initialized</p>
+    <p>> Awaiting scan request...</p>
+    <p>> Monitoring suspicious domains...</p>
+</section>
 
 <script>
-function showLoader(){
+function showLoader() {
     document.getElementById("loader").style.display = "block";
 }
 </script>

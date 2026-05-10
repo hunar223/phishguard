@@ -5,17 +5,24 @@ app = Flask(__name__)
 
 model = joblib.load("phishing_model.pkl")
 
+
 @app.route('/')
 def home():
     return render_template("index.html")
+
 
 @app.route('/predict', methods=['POST'])
 def predict():
     url = request.form['url']
 
     prediction = model.predict([url])[0]
-    prob = model.predict_proba([url])[0]
-    confidence = round(max(prob) * 100, 2)
+    probs = model.predict_proba([url])[0]
+
+    safe_prob = round(probs[0] * 100, 2)
+    phishing_prob = round(probs[1] * 100, 2)
+
+    confidence = max(safe_prob, phishing_prob)
+    threat = phishing_prob
 
     if prediction == 1:
         result = "PHISHING WEBSITE DETECTED"
@@ -24,11 +31,15 @@ def predict():
         result = "SAFE WEBSITE"
         color = "green"
 
-    return render_template("result.html",
-                           url=url,
-                           result=result,
-                           confidence=confidence,
-                           color=color)
+    return render_template(
+        "result.html",
+        url=url,
+        result=result,
+        confidence=confidence,
+        threat=threat,
+        color=color
+    )
+
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=10000)
+    app.run(debug=True)
