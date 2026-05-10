@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PhishGuard AI</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="navbar">
+    <div class="logo">🛡 PhishGuard</div>
+</div>
+
+<div class="hero">
+
+    <h1>AI Cyber Threat Detection</h1>
+    <p>Detect phishing websites instantly using Machine Learning</p>
+
+    <form action="/predict" method="POST" onsubmit="showLoader()">
+
+        <input type="text" name="url" placeholder="Enter URL..." required>
+
+        <button type="submit">Scan</button>
+
+    </form>
+
+    <div id="loader">
+        <div class="spinner"></div>
+        <p>Scanning URL...</p>
+    </div>
+
+</div>
+
+<div class="features">
+    <div class="card">⚡ Fast</div>
+    <div class="card">🧠 AI Powered</div>
+    <div class="card">🔐 Secure</div>
+</div>
+
+<script>
+function showLoader(){
+    document.getElementById("loader").style.display = "block";
+}
+</script>
+
+</body>
+</html>

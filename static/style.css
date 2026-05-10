@@ -1,0 +1,140 @@
+body {
+    margin: 0;
+    font-family: Arial;
+    background: #0b1020;
+    color: white;
+}
+
+/* NAVBAR */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    background: #111827;
+}
+
+.logo {
+    color: #00ffd5;
+    font-weight: bold;
+}
+
+/* HERO */
+.hero {
+    text-align: center;
+    margin-top: 80px;
+}
+
+h1 {
+    color: #00ffd5;
+}
+
+/* INPUT */
+input {
+    padding: 12px;
+    width: 300px;
+    border-radius: 8px;
+    border: none;
+}
+
+/* BUTTON */
+button {
+    padding: 12px 20px;
+    background: #00ffd5;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    font-weight: bold;
+    margin: 10px;
+}
+
+/* LOADER */
+#loader {
+    display: none;
+    margin-top: 20px;
+}
+
+.spinner {
+    border: 4px solid #333;
+    border-top: 4px solid #00ffd5;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin: auto;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    100% { transform: rotate(360deg); }
+}
+
+/* FEATURES */
+.features {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    gap: 20px;
+}
+
+.card {
+    background: #111827;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+/* REPORT */
+.report {
+    text-align: center;
+    padding: 20px;
+}
+
+.url-box {
+    background: #111827;
+    padding: 10px;
+    width: 60%;
+    margin: auto;
+    border-radius: 10px;
+}
+
+/* RESULT */
+.result-card {
+    padding: 15px;
+    width: 60%;
+    margin: 20px auto;
+    border-radius: 10px;
+}
+
+.green { border-left: 5px solid lime; }
+.red { border-left: 5px solid red; }
+
+/* METER */
+.meter {
+    width: 60%;
+    height: 15px;
+    background: #333;
+    margin: auto;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.fill {
+    height: 100%;
+    background: linear-gradient(to right, #00ff99, #ff3b3b);
+}
+
+/* CHART */
+.chart-box {
+    width: 250px;
+    margin: auto;
+}
+
+/* TERMINAL */
+.terminal {
+    background: black;
+    color: #00ff99;
+    width: 60%;
+    margin: 20px auto;
+    padding: 15px;
+    font-family: monospace;
+    text-align: left;
+    border-radius: 10px;
+}
